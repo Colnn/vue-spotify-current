@@ -47,7 +47,6 @@
     },
     watch: {
       'errors': function () {
-        console.log(this.errors);
         this.eraseText(true);
       }
     },
@@ -99,7 +98,6 @@
             .then(handleErrors)
             .then((response) => response.json())
             .then((data) => {
-              console.log(data);
               let song = data.item.name;
               let artists = "";
               if(data.item.artists.length > 1) {
@@ -110,7 +108,6 @@
                 artists = data.item.artists[0].name;
               }
               this.newSong = song + ' - ' + artists;
-              console.log(this.newSong);
               if(this.playing !== this.newSong && this.typeStatus == false) {
                 this.eraseText();
               }
@@ -124,7 +121,6 @@
       },
       typeText() {
         this.playing = this.newSong;
-        console.log(this.playing);
         if (this.charIndex < this.playing.length) {
             if (!this.typeStatus) this.typeStatus = true;
             this.typeValue += this.playing.charAt(
