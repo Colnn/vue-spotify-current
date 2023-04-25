@@ -1,30 +1,27 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Auth from '@/views/Auth.vue';
+import { createRouter, createWebHistory } from "vue-router";
+import Home from "@/views/Home.vue";
+import Auth from "@/views/Auth.vue";
+import Callback from "@/views/Callback.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'auth',
-      component: Auth
+      path: "/",
+      name: "home",
+      component: Home,
     },
     {
-      path: '/auth/callback/*',
-      beforeEnter(to, from, next) {
-        if (to.query.code !== "" && to.query.code !== undefined) {
-          store.commit("setCode", to.query.code)
-          store.dispatch("initUser").then(() => {
-            next("/")
-          }).catch(() => {
-            next("/auth")
-          })
-        } else {
-          next("/auth")
-        }
-      }
+      path: "/login",
+      name: "login",
+      component: Auth,
     },
-  ]
-})
+    {
+      path: "/callback",
+      name: "callback",
+      component: Callback,
+    },
+  ],
+});
 
-export default router
+export default router;
