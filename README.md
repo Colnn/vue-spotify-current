@@ -1,29 +1,21 @@
 # vue-spotify-current
 
-This template should help get you started developing with Vue 3 in Vite.
+A small [opensource](https://opensource.org/) vue application that displays the currently playing Spotify song. (Will soon be running on a production server for public use)
 
-## Recommended IDE Setup
+## Setup
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+To set this application up locally, follow these instructions:
+1. ```npm install ```
+2. Copy .env.example to .env
+3. [Create a Spotify App](https://developer.spotify.com/dashboard)
+4. Fill in the empty variable in the .env
+5. ```npm run dev```
+The application should now the running locally. Check out the given URL to see if it is. You can now add a web source to your preferred streaming application, enter the URL and you're done!
 
-## Customize configuration
+## Plans
+Here are some features I am planning on adding:
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+- More themes (Currently only includes a Commodore 64 theme)
 
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+## Issues
+Feel free to report any issues you have with this application in the issues tab, and I (or someone else) will respond as quick as possible to help you.
