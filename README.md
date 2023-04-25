@@ -1,6 +1,6 @@
 # vue-spotify-current
 
-A small [opensource](https://opensource.org/) vue application that displays the currently playing Spotify song. (Will soon be running on a production server for public use)
+A small [opensource](https://opensource.org/) VueJS-based stream widget that displays the currently playing Spotify song. (Will soon be running on a production server for public use)
 
 ## Setup
 
