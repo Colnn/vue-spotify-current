@@ -109,7 +109,7 @@
               }
               this.newSong = song + ' - ' + artists;
               if(this.playing !== this.newSong && this.typeStatus == false) {
-                this.eraseText();
+                this.eraseText(false);
               }
             })
             .catch(error => this.errors=error)
