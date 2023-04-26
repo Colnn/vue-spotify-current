@@ -16,7 +16,6 @@
                     tokenType: null,
                     expiredIn: null,
                     state: null,
-                    refreshToken: null,
                 },
             }
         },
@@ -29,7 +28,6 @@
                 this.authorize.tokenType = urlParams.get('token_type')
                 this.authorize.expiredIn = urlParams.get('expires_in')
                 this.authorize.state = urlParams.get('state')
-                this.authorize.state = urlParams.get('refresh_token')
             },
             setTokenLocal: function(){
                 localStorage.setItem("authCode", JSON.stringify(this.authorize))
