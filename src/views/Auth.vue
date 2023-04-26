@@ -13,7 +13,7 @@
       const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
       const redirect_uri = import.meta.env.VITE_SPOTIFY_REDIRECT_URL;
       const state = this.generateString(16);
-      const scope = 'user-read-email+user-read-private+user-read-currently-playing';
+      const scope = 'user-read-private+user-read-currently-playing';
 
       let authUrl = 'https://accounts.spotify.com/authorize?response_type=token&redirect_uri='+redirect_uri+'&client_id='+clientId+'&scope='+scope+'&state='+state
       this.authUrl = authUrl.replace(' ', '')
