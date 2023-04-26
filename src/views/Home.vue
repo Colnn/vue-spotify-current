@@ -7,6 +7,7 @@
       }else{
         this.localToData()
         this.spotCallAPI()
+        this.checkTheme()
         this.toogle = true
       }
 
@@ -37,12 +38,17 @@
         playing: "",
         newSong: "",
         errors: null,
-        typeValue: "",
-        typeStatus: false,
-        typingSpeed: 100,
-        erasingSpeed: 100,
-        newTextDelay: 2000,
-        charIndex: 0,
+        typer: {
+          typeValue: "",
+          typeStatus: false,
+          typingSpeed: 100,
+          erasingSpeed: 100,
+          newTextDelay: 2000,
+          charIndex: 0,
+          cursor: '',
+        },
+        theme: 'Commodore64',
+        classes: '',
       }
     },
     watch: {
@@ -57,6 +63,28 @@
         this.authCode.tokenType = authCode.tokenType
         this.authCode.expiredIn = authCode.expiredIn
         this.authCode.state = authCode.state
+      },
+      checkTheme: function() {
+        if(localStorage.getItem('theme') == null) {
+          localStorage.setItem('theme', 'normal');
+        }
+        this.theme = localStorage.getItem('theme');
+        if(this.theme == 'commodore64') {
+          this.classes = 'font-commodore bg-blue-800';
+          this.typer.cursor = '¡';
+        } else {
+          this.classes = 'font-mono';
+          this.typer.cursor = '|';
+        }
+        console.log(this.theme);
+      },
+      cycleThemes: function() {
+        if(localStorage.getItem('theme') == 'commodore64') {
+          localStorage.setItem('theme', 'normal');
+        } else if(localStorage.getItem('theme') == 'normal') {
+          localStorage.setItem('theme', 'commodore64');
+        }
+        this.checkTheme();
       },
       generateString: function(length) {
         const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -108,7 +136,7 @@
                 artists = data.item.artists[0].name;
               }
               this.newSong = song + ' - ' + artists;
-              if(this.playing !== this.newSong && this.typeStatus == false) {
+              if(this.playing !== this.newSong && this.typer.typeStatus == false) {
                 this.eraseText(false);
               }
             })
@@ -121,28 +149,28 @@
       },
       typeText() {
         this.playing = this.newSong;
-        if (this.charIndex < this.playing.length) {
-            if (!this.typeStatus) this.typeStatus = true;
-            this.typeValue += this.playing.charAt(
-            this.charIndex
+        if (this.typer.charIndex < this.playing.length) {
+            if (!this.typer.typeStatus) this.typer.typeStatus = true;
+            this.typer.typeValue += this.playing.charAt(
+            this.typer.charIndex
             );
-            this.charIndex += 1;
-            setTimeout(this.typeText, this.typingSpeed);
+            this.typer.charIndex += 1;
+            setTimeout(this.typeText, this.typer.typingSpeed);
         } else {
-            this.typeStatus = false;
+            this.typer.typeStatus = false;
         }
         },
         eraseText(error) {
-            if (this.charIndex > 0) {
-                if (!this.typeStatus) this.typeStatus = true;
-                this.typeValue = this.playing.substring(
+            if (this.typer.charIndex > 0) {
+                if (!this.typer.typeStatus) this.typer.typeStatus = true;
+                this.typer.typeValue = this.playing.substring(
                 0,
-                this.charIndex - 1
+                this.typer.charIndex - 1
                 );
-                this.charIndex -= 1;
-                setTimeout(this.eraseText, this.erasingSpeed);
+                this.typer.charIndex -= 1;
+                setTimeout(this.eraseText, this.typer.erasingSpeed);
             } else {
-                this.typeStatus = false;
+                this.typer.typeStatus = false;
                 if(error == true) {
                     window.location.href=this.authUrl
                 } else {
@@ -156,10 +184,10 @@
 
 <template>
   <main>
-    <div class="font-commodore bg-blue-800">
-        <span class="typed-text text-gray-200 text-2xl">{{ typeValue }}</span>
-        <span class="blinking-cursor text-gray-200 text-2xl">¡</span>
-        <span class="cursor" :class="{ typing: typeStatus }"></span>
+    <div :class="this.classes" @click="this.cycleThemes">
+        <span class="typed-text text-gray-200 text-2xl">{{ typer.typeValue }}</span>
+        <span class="blinking-cursor text-gray-200 text-2xl">{{ this.typer.cursor }}</span>
+        <span class="cursor" :class="{ typing: typer.typeStatus }"></span>
     </div>
   </main>
 </template>
