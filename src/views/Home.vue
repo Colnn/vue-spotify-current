@@ -40,11 +40,10 @@
           typeStatus: false,
           typingSpeed: 100,
           erasingSpeed: 100,
-          newTextDelay: 2000,
           charIndex: 0,
           cursor: '',
         },
-        theme: 'Commodore64',
+        theme: '',
         classes: '',
       }
     },
