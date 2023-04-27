@@ -19,9 +19,6 @@
       let authUrl = 'https://accounts.spotify.com/authorize?response_type=token&redirect_uri='+redirect_uri+'&client_id='+clientId+'&scope='+scope+'&state='+state
       this.authUrl = authUrl.replace(' ', '')
     },
-    components: {
-      RouterLink,
-    },
     data() {
       return {
         authCode: {
