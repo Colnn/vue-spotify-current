@@ -126,7 +126,11 @@
               let artists = "";
               if(data.item.artists.length > 1) {
                 data.item.artists.forEach(artist => {
-                    artists = artists.concat(', ' + artist.name);
+                    if(artists == "") {
+                      artists = artist.name;
+                    } else {
+                      artists = artists.concat(', ' + artist.name);
+                    }
                 });
               } else {
                 artists = data.item.artists[0].name;
